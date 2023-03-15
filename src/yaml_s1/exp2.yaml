@@ -1,0 +1,38 @@
+experiment_name: exp_v3_64_new_f1
+output_dir: ../output/mpnet
+debug: false
+architecture:
+    reinit_n_layers: 0
+    mixout: 0.0
+    pretrained_weights: "" 
+    model_name: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+    pool: Mean 
+dataset:
+    fold: 1
+    topic_df: ../data_retriever/topics_filled.csv
+    content_df: ../data_retriever/content_filled.csv
+    train_dataframe: ../data_retriever/train_retriever.csv
+    correlations: ../data/correlations.csv
+    folds_csv: ../data_retriever/folds.csv
+    base_dir: ../data_retriever
+    num_folds: 5
+    max_len: 32
+    use_only_pos: true
+environment:
+    mixed_precision: true
+    num_workers: 4
+    seed: 42
+training:
+    warmup_pct: 10
+    save_best: true
+    fp16: true
+    eval_steps: 2500
+    epochs: 30
+    batch_size: 512
+wandb: 
+    enable: false
+    project_name: lrng_equality
+awp:
+    enable: false
+    start_epoch: 2
+

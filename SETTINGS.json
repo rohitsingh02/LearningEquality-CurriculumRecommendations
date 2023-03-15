@@ -1,0 +1,6 @@
+{
+  "TRAIN_CSV_PATH": "../data/train.csv",
+  "SAMPLE_SUBMISSION_CSV_PATH": "../data/sample_submission.csv",
+  "MODELS_DIR_PATH_S1": "../output/mpnet/",
+  "MODELS_DIR_PATH": "../models/"
+}

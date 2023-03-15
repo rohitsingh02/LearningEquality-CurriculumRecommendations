@@ -1,0 +1,60 @@
+dataset_class: learning_ds
+model_class: learning_model
+experiment_name: exp001_f1_mpnet_64
+output_dir: ../models
+uns_model:  ../output/mpnet/exp_v3_64_new_f1
+debug: false
+architecture:
+    reinit_n_layers: 0
+    mixout: 0.0
+    pretrained_weights: "" 
+    model_name: sentence-transformers/paraphrase-multilingual-mpnet-base-v2 
+    custom_intermediate_dropout: true
+    dropout: 0
+    gradient_checkpointing: true
+    intermediate_dropout: 0
+    pool: Mean # GeM # WLP # Mean
+dataset:
+    max_len: 64 #96 #128
+    fold: 1
+    target_col: target
+    text_column1: title1
+    text_column2: title2
+    topic_df: ../data_retriever/topics_filled.csv
+    content_df: ../data_retriever/content_filled.csv
+    correlations: ../data/correlations.csv
+    folds_csv: ../data_retriever/folds.csv
+    train_dataframe: ../data_retriever/train_ret_mpnet_50_f1_64.csv 
+    base_dir: ../data
+    num_folds: 5
+environment:
+    mixed_precision: true
+    num_workers: 4
+    seed: 42
+training:
+    save_oofs: true
+    batch_size: 1568 #386 #186 #386
+    drop_last_batch: true
+    epoch_subsample: 0.5
+    epochs: 30
+    print_freq: 50
+    batch_scheduler: true
+    grad_accumulation: 1
+    gradient_clip: 0
+    max_grad_norm: 0.012
+scheduler:
+    schedule: cosine # linear
+    num_cycles: 1
+    warmup_ratio: 0.1
+optimizer:
+    llrd: false
+    encoder_lr: 1.0e-4 #1.0e-5
+    decoder_lr: 1.0e-4
+    weight_decay: 0.01
+    eps: 1.0e-6
+wandb: 
+    enable: false
+    project_name: lrng_equality
+awp:
+    enable: false
+    start_epoch: 0
